@@ -1,0 +1,42 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:grouped_sales, scope: :grouped_sales_reports) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <li><%= link_to_with_icon 'icon-arrow-left', Spree.t(:back_to_reports_list), spree.admin_reports_url, class: 'button' %></li>
+<% end %>
+
+
+<% content_for :table_filter_title do %>
+  <%= Spree.t(:date_range) %>
+<% end %>
+
+<% content_for :table_filter do %>
+  <%= render partial: 'spree/admin/reports/grouped_sales_criteria', locals: {} %>
+<% end %>
+
+<% @grouped_totals.each do |id, group| %>
+  <table class="admin-report" data-hook="grouped_sales">
+    <caption title="<%= group[:description] %>"><%= group[:name] %></caption>
+    <thead>
+      <tr>
+        <th><%= Spree.t(:sku) %></th>
+        <th><%= Spree.t(:name) %></th>
+        <% @order_states.each do |state| %>
+          <th><%= state.humanize %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% group[:items].each do |item_id, item| %>
+        <tr>
+          <td><%= item[:sku] %></td>
+          <td><%= item[:name] %></td>
+          <% @order_states.each do |state| %>
+            <td><%= item[:data][state] %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

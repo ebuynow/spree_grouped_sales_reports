@@ -1,0 +1,19 @@
+<%= render(partial: "spree/admin/variants/autocomplete", formats: :js) %>
+
+<div data-hook="admin_sales_report_group_variant_form_fields">
+  <div class="alpha twelve columns">
+    <fieldset data-hook="sales_report_group" class=" no-border-bottom">
+      <legend align="center"><%= Spree.t(:general_settings) %></legend>
+      <div class="alpha omage twelve columns">
+        <div data-hook="variant" class="field">
+          <%= f.label :variant_id, Spree.t(:sales_report_group_variant_variant, scope: :grouped_sales_reports) %>
+          <%= f.hidden_field(:variant_id, class: 'variant_autocomplete fullwidth') %>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="clear"></div>
+</div>
+
+<%= content_tag(:script, raw('$(document).ready(function(e) { $(".variant_autocomplete").variantAutocomplete(); });')) %>

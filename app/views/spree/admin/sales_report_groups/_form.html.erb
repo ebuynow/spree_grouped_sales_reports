@@ -1,0 +1,21 @@
+<div data-hook="admin_sales_report_group_form_fields">
+  <div class="alpha twelve columns">
+    <fieldset data-hook="sales_report_group" class=" no-border-bottom">
+      <legend align="center"><%= Spree.t(:general_settings) %></legend>
+      <div class="alpha six columns">
+        <div data-hook="name" class="field">
+          <%= f.label :name, Spree.t(:sales_report_group_name, scope: :grouped_sales_reports) %>
+          <%= f.text_field :name, class: 'fullwidth' %>
+        </div>
+      </div>
+      <div class="omega six columns">
+        <div data-hook="description" class="field">
+          <%= f.label :description, Spree.t(:sales_report_group_description, scope: :grouped_sales_reports) %>
+          <%= f.text_area :description, class: 'fullwidth', rows: 8 %>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="clear"></div>
+</div>

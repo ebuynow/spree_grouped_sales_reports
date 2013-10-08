@@ -1,0 +1,59 @@
+<%= render partial: 'spree/admin/shared/configuration_menu' %>
+
+<% content_for :page_title do %>
+  <%= Spree.t(:sales_report_group, scope: :grouped_sales_reports) %> - <%= @sales_report_group.name %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <li>
+    <%= button_link_to Spree.t(:back), spree.admin_sales_report_groups_path, icon: 'icon-arrow-left' %>
+  </li>
+  <li>
+    <%= button_link_to(Spree.t(:new_sales_report_group_variant, scope: :grouped_sales_reports), spree.new_admin_sales_report_group_sales_report_group_variant_path(@sales_report_group), icon: 'icon-plus') %>
+  </li>
+  <li>
+    <%= button_link_to(Spree.t(:edit_sales_report_group, scope: :grouped_sales_reports), spree.edit_admin_sales_report_group_path(@sales_report_group), icon: 'icon-edit') %>
+  </li>
+<% end %>
+
+<fieldset class="no-border-bottom">
+  <legend><%= Spree.t(:general_settings) %></legend>
+  <dl>
+    <dd><%= Spree.t(:sales_report_group_name, scope: :grouped_sales_reports) %></dd>
+    <dt><%= @sales_report_group.name %></dt>
+    <dd><%= Spree.t(:sales_report_group_description, scope: :grouped_sales_reports) %></dd>
+    <dt><%= @sales_report_group.description %></dt>
+  </dl>
+</fieldset>
+
+<fieldset>
+  <legend><%= Spree.t(:sales_report_group_variants, scope: :grouped_sales_reports) %></legend>
+  <% unless @sales_report_group.sales_report_group_variants.any? %>
+    <div class="no-objects-found">
+      <%= Spree.t(:no_results) %>
+    </div>
+  <% else %>
+    <table class="index">
+      <colgroup>
+        <col style="width: 75%">
+        <col style="width: 15%">
+      </colgroup>
+      <thead>
+        <tr data-hook="sales_report_group_variants_header">
+          <th><%= Spree.t(:sales_report_group_variant_variant, scope: :grouped_sales_reports) %></th>
+          <th class="actions"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @sales_report_group.sales_report_group_variants.each do |sales_report_group_variant|%>
+          <tr id="<%= spree_dom_id sales_report_group_variant %>" data-hook="sales_report_group_variant_row" class="<%= cycle('odd', 'even')%>">
+            <td><%= sales_report_group_variant.variant.name %> (<%= sales_report_group_variant.variant.sku %>)</td>
+            <td class="actions">
+              <%= link_to_delete sales_report_group_variant, no_text: true, url: spree.admin_sales_report_group_variant_path(sales_report_group_variant) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</fieldset>

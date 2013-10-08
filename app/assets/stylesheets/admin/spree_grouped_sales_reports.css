@@ -1,0 +1,8 @@
+/*
+ *= require admin/spree_backend
+*/
+
+table caption {
+  text-transform: uppercase;;
+  margin-bottom: 8px;
+}
