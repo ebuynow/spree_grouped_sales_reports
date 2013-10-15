@@ -17,7 +17,14 @@
 
 <% @grouped_totals.each do |id, group| %>
   <table class="admin-report" data-hook="grouped_sales">
-    <caption title="<%= group[:description] %>"><%= group[:name] %></caption>
+    <caption><%= group[:name] %></caption>
+    <% unless group[:description].blank? %>
+      <tr>
+        <td colspan="<%= @order_states.count + 2 %>">
+          <%= simple_format(group[:description]) %>
+        </td>
+      </tr>
+    <% end %>
     <thead>
       <tr>
         <th><%= Spree.t(:sku) %></th>
