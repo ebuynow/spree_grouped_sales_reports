@@ -21,9 +21,9 @@
     <thead>
       <% unless group[:description].blank? %>
         <tr>
-          <td colspan="<%= @order_states.count + 2 %>">
+          <th colspan="<%= @order_states.count + 2 %>">
             <%= simple_format(group[:description]) %>
-          </td>
+          </th>
         </tr>
       <% end %>
       <tr>
