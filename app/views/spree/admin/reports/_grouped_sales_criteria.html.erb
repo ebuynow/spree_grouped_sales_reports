@@ -1,14 +1,24 @@
-<%= search_form_for @search, :url => spree.grouped_sales_admin_reports_path  do |s| %>
+<%= search_form_for @search, url: spree.grouped_sales_admin_reports_path  do |s| %>
   <div class="date-range-filter field align-center">
-    <%= label_tag nil, Spree.t(:start), :class => 'inline' %>
-    <%= s.text_field :created_at_gt, :class => 'datepicker datepicker-from', value: datepicker_field_value(params[:q][:created_at_gt]) %>
+    <%= label_tag nil, Spree.t(:start), class: 'inline' %>
+    <%= s.text_field :created_at_gt, class: 'datepicker datepicker-from', value: datepicker_field_value(params[:q][:created_at_gt]) %>
 
     <span class="range-divider">
       <i class="icon-arrow-right"></i>
     </span>
 
-    <%= s.text_field :created_at_lt, :class => 'datepicker datepicker-to', value: datepicker_field_value(params[:q][:created_at_lt]) %>
-    <%= label_tag nil, Spree.t(:end), :class => 'inline' %>
+    <%= s.text_field :created_at_lt, class: 'datepicker datepicker-to', value: datepicker_field_value(params[:q][:created_at_lt]) %>
+    <%= label_tag nil, Spree.t(:end), class: 'inline' %>
+  </div>
+
+  <div class="state-filter field align-center">
+    <%= label_tag nil, Spree.t(:order_states, scope: :grouped_sales_reports), class: 'inline' %>
+    <%= s.select :order_state_in, (@order_states.map { |state| Spree.t("order_state.#{state}").humanize }).zip(@order_states), {}, { multiple: true, class: 'select2', style: 'min-width: 240px;' } %>
+  </div>
+
+  <div class="country-filter field align-center">
+    <%= label_tag nil, Spree.t(:countries), class: 'inline' %>
+    <%= s.select :order_bill_address_country_id_in, Spree::Country.order(:name).all.map { |country| [country.name, country.id] }, {}, { multiple: true, class: 'select2', style: 'min-width: 240px;' } %>
   </div>
 
   <div class="actions filter-actions">

@@ -3,6 +3,7 @@ en:
     grouped_sales_reports:
       grouped_sales: Grouped sales
       grouped_sales_description: A report with grouped sales by sales group as defined in the main configuration
+      order_states: States
 
       ## Sales report groups
       # Models

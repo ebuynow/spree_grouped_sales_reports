@@ -8,7 +8,7 @@
 
 
 <% content_for :table_filter_title do %>
-  <%= Spree.t(:date_range) %>
+  <%= Spree.t(:filter) %>
 <% end %>
 
 <% content_for :table_filter do %>
@@ -21,16 +21,15 @@
     <thead>
       <% unless group[:description].blank? %>
         <tr>
-          <th colspan="<%= @order_states.count + 2 %>">
+          <th colspan="<%= @order_states_selected.count + 1 %>">
             <%= simple_format(group[:description]) %>
           </th>
         </tr>
       <% end %>
       <tr>
         <th><%= Spree.t(:sku) %></th>
-        <th><%= Spree.t(:name) %></th>
-        <% @order_states.each do |state| %>
-          <th><%= state.humanize %></th>
+        <% @order_states_selected.each do |state| %>
+          <th><%= Spree.t("order_state.#{state}").humanize %></th>
         <% end %>
       </tr>
     </thead>
@@ -38,8 +37,7 @@
       <% group[:items].each do |item_id, item| %>
         <tr>
           <td><%= item[:sku] %></td>
-          <td><%= item[:name] %></td>
-          <% @order_states.each do |state| %>
+          <% @order_states_selected.each do |state| %>
             <td><%= item[:data][state] %></td>
           <% end %>
         </tr>
