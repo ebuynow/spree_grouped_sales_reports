@@ -38,4 +38,4 @@ Spree::Admin::ReportsController.class_eval do
   end
 end
 
-Spree::Admin::ReportsController::AVAILABLE_REPORTS[:grouped_sales] = { name: Spree.t(:grouped_sales, scope: :grouped_sales_reports), description: Spree.t(:grouped_sales_description, scope: :grouped_sales_reports) }
+Spree::Admin::ReportsController.add_available_report!(:grouped_sales)
